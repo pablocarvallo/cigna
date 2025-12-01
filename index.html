@@ -297,22 +297,45 @@
             }
         }
 
+        // Función para descargar un archivo (reemplaza la copia al portapapeles)
+        function downloadFile(filename, text) {
+            // Crea un Blob con los datos y el tipo de archivo (texto plano)
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            
+            // Crea un enlace temporal para la descarga
+            const element = document.createElement('a');
+            element.setAttribute('href', url);
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            // Simula el clic para iniciar la descarga
+            element.click();
+
+            // Limpia el enlace y el URL del objeto
+            document.body.removeChild(element);
+            URL.revokeObjectURL(url);
+        }
+
         async function handleExport() {
             try {
                 const records = loadRecords();
                 let exportData = '';
                 
-                // Encabezado (separado por tabulaciones)
+                // Encabezado (separado por tabulaciones - ideal para copiar y pegar en hojas de cálculo)
                 exportData += 'Persona\tCategoría\tFecha\tDetalle\tMonto\n';
 
                 records.forEach((data) => {
-                    // Usa el timestamp almacenado para el formato de fecha
-                    const dateFormatted = formatDate(data.timestamp).replace(/\//g, ' '); // Ej: 01 dic
-                    // Remueve símbolos de moneda y separadores de miles para la exportación
-                    const amountFormatted = formatAmount(data.amount).replace(/\$/g, '').replace(/\./g, '').replace(/,/g, ''); 
+                    // Usa el timestamp almacenado para el formato de fecha (Ej: 01 dic)
+                    const dateFormatted = formatDate(data.timestamp).replace(/\//g, ' '); 
+                    
+                    // Utiliza el monto como número puro o string simple (sin formateo de moneda)
+                    const amountRaw = data.amount.toString();
 
-                    // Formato: pablo, consulta, 01/dic, dermatóloga, $70.000 (separado por tabulación)
-                    const line = `${data.person}\t${data.category}\t${dateFormatted}\t${data.detail}\t$${amountFormatted}\n`;
+                    // Formato: pablo	consulta	01 dic	dermatóloga	70000 (separado por tabulación)
+                    const line = `${data.person}\t${data.category}\t${dateFormatted}\t${data.detail}\t${amountRaw}\n`;
                     exportData += line;
                 });
                 
@@ -321,8 +344,13 @@
                     return;
                 }
 
-                copyToClipboard(exportData);
-                showMessage('Datos exportados y copiados al portapapeles. ¡Listo para pegar en Excel!', 'success');
+                const dateString = new Date().toISOString().slice(0, 10);
+                const filename = `gastos_medicos_${dateString}.txt`;
+                
+                // Llama a la nueva función de descarga
+                downloadFile(filename, exportData);
+                
+                showMessage(`Archivo "${filename}" generado y listo para descargar/guardar.`, 'success');
 
             } catch (e) {
                 console.error("Error al exportar datos: ", e);
@@ -331,21 +359,8 @@
         }
         
         // --- Custom UI functions (No native alert/confirm) ---
-
-        function copyToClipboard(text) {
-            // Usando un fallback para entornos donde navigator.clipboard está restringido
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            textarea.style.position = 'fixed'; 
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-            } catch (err) {
-                console.error('Fallback: No se pudo copiar el texto: ', err);
-            }
-            document.body.removeChild(textarea);
-        }
+        
+        // **FUNCIÓN copyToClipboard ELIMINADA y reemplazada por downloadFile**
 
         function confirmAction(message) {
              const confirmationModal = document.getElementById('confirmation-modal');
@@ -491,7 +506,7 @@
             <!-- Botones de Acción -->
             <div class="flex flex-col space-y-4 pt-2">
                 <button id="export-btn" class="ios-button bg-green-500 hover:bg-green-600 text-white w-full">
-                    Exportar a Texto Plano (Copiar para Excel)
+                    Exportar a Archivo de Texto (.txt)
                 </button>
                 <button id="reset-btn" class="ios-button danger-button w-full">
                     ⚠️ Resetear Todos los Registros
