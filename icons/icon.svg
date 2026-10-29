@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Gastos médicos">
+<defs>
+  <clipPath id="icignaxround"><rect width="1024" height="1024" rx="230"/></clipPath>
+  <linearGradient id="icignaxbg" x1="0.18" y1="0" x2="0.82" y2="1">
+    <stop offset="0" stop-color="#7AA4F7"/><stop offset="0.46" stop-color="#4D78F3"/><stop offset="1" stop-color="#2950F4"/>
+  </linearGradient>
+  <radialGradient id="icignaxlt" cx="0.18" cy="0.06" r="0.78">
+    <stop offset="0" stop-color="#BDEBFB" stop-opacity="0.62"/><stop offset="1" stop-color="#BDEBFB" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="icignaxdk" cx="0.86" cy="1.02" r="0.7">
+    <stop offset="0" stop-color="#1B3AD6" stop-opacity="0.45"/><stop offset="1" stop-color="#1B3AD6" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="icignaxgw" gradientUnits="userSpaceOnUse" x1="300" y1="160" x2="700" y2="870">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.5" stop-color="#EEF5FF"/><stop offset="1" stop-color="#C7DCFC"/>
+  </linearGradient>
+  <linearGradient id="icignaxgs" gradientUnits="userSpaceOnUse" x1="300" y1="160" x2="700" y2="870">
+    <stop offset="0" stop-color="#EAFAFF" stop-opacity="0.9"/><stop offset="0.5" stop-color="#BDEBFB" stop-opacity="0.66"/><stop offset="1" stop-color="#99C2F8" stop-opacity="0.58"/>
+  </linearGradient>
+  <filter id="icignaxglass" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="20" result="sb"/>
+    <feOffset in="sb" dy="24" result="so"/>
+    <feFlood flood-color="#0E237E" flood-opacity="0.42"/>
+    <feComposite in2="so" operator="in" result="sh0"/>
+    <feComposite in="sh0" in2="SourceAlpha" operator="out" result="shadow"/>
+    <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="b1"/>
+    <feOffset in="b1" dy="8" result="o1"/>
+    <feComposite in="SourceAlpha" in2="o1" operator="arithmetic" k2="1" k3="-1" result="topEdge"/>
+    <feFlood flood-color="#FFFFFF" flood-opacity="1"/>
+    <feComposite in2="topEdge" operator="in" result="hl"/>
+    <feGaussianBlur in="SourceAlpha" stdDeviation="9" result="b2"/>
+    <feOffset in="b2" dy="-12" result="o2"/>
+    <feComposite in="SourceAlpha" in2="o2" operator="arithmetic" k2="1" k3="-1" result="botEdge"/>
+    <feFlood flood-color="#2950F4" flood-opacity="0.38"/>
+    <feComposite in2="botEdge" operator="in" result="inner"/>
+    <feGaussianBlur in="SourceAlpha" stdDeviation="14" result="bump"/>
+    <feSpecularLighting in="bump" surfaceScale="5" specularConstant="0.9" specularExponent="32" lighting-color="#FFFFFF" result="spec">
+      <feDistantLight azimuth="235" elevation="58"/>
+    </feSpecularLighting>
+    <feComposite in="spec" in2="SourceAlpha" operator="in" result="specIn"/>
+    <feMorphology in="SourceAlpha" operator="dilate" radius="2.4" result="dil"/>
+    <feComposite in="dil" in2="SourceAlpha" operator="out" result="ringA"/>
+    <feFlood flood-color="#0B1F6E" flood-opacity="0.32"/>
+    <feComposite in2="ringA" operator="in" result="rim"/>
+    <feMerge>
+      <feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/><feMergeNode in="inner"/>
+      <feMergeNode in="specIn"/><feMergeNode in="hl"/><feMergeNode in="rim"/>
+    </feMerge>
+  </filter>
+</defs>
+<g clip-path="url(#icignaxround)">
+<rect width="1024" height="1024" fill="url(#icignaxbg)"/>
+<rect width="1024" height="1024" fill="url(#icignaxlt)"/>
+<rect width="1024" height="1024" fill="url(#icignaxdk)"/>
+<g transform="translate(512 516) scale(1.04) translate(-512 -516)">
+<g filter="url(#icignaxglass)" fill="url(#icignaxgs)"><path d="M512 168 C 604 214 694 238 782 246 C 800 248 812 262 812 280 V 512 C 812 690 700 812 512 880 C 324 812 212 690 212 512 V 280 C 212 262 224 248 242 246 C 330 238 420 214 512 168 Z"/></g>
+<g filter="url(#icignaxglass)" fill="url(#icignaxgw)"><rect x="440" y="336" width="144" height="372" rx="50"/><rect x="326" y="450" width="372" height="144" rx="50"/></g>
+</g>
+</g>
+</svg>
