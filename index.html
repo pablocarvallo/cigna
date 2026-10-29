@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Gastos médicos</title>
 <!--STANDALONE:START-->
 <meta name="robots" content="noindex, nofollow">
@@ -504,6 +504,26 @@ dialog.sheet.wide{max-width:920px}
 .imp-row select{border:1.5px solid transparent;background:var(--ds-fill,var(--surface-2));border-radius:12px;min-height:38px}
 .st.ya{border:0;background:var(--ds-fill,var(--surface-2))}
 .note,.err{border-radius:14px}
+
+/* app del iPhone */
+.iph-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;border:0;background:var(--ds-fill,var(--surface-2));border-radius:16px;padding:10px 12px;margin-top:12px;text-align:left;flex:none;color:var(--ink)}
+.iph-row svg{width:20px;height:20px;color:var(--ds-tint,var(--accent))}
+.iph-row b{display:block;font-weight:600;font-size:14px}
+.iph-row small{display:block;color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.iph-row small.warn{color:var(--pend)}
+.iph-row .chev{color:var(--muted);font-size:22px;line-height:1}
+.iph p{margin:0}
+.iph-st{display:grid;gap:2px;border-radius:16px;padding:12px 14px;background:var(--ds-fill,var(--surface-2))}
+.iph-st b{font-size:16px}
+.iph-st span{font-size:13px;color:var(--ink-2)}
+.iph-st.pend{background:var(--pend-bg)}.iph-st.pend b{color:var(--pend)}
+.iph-st.ok{background:var(--pag-bg)}.iph-st.ok b{color:var(--pag)}
+.iph h3{font-size:13px;font-weight:600;color:var(--ds-ink-2,var(--muted));margin:0 0 6px}
+.iph ol{margin:0;padding-left:20px;display:grid;gap:4px;color:var(--ink-2);font-size:14px}
+.iph ol a{color:var(--ds-tint,var(--accent));font-weight:600}
+.iph-code{display:flex;gap:8px;align-items:center;min-width:0}
+.iph-code code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:13px var(--ds-font-mono,monospace);background:var(--ds-fill,var(--surface-2));border-radius:12px;padding:12px;-webkit-user-select:all;user-select:all}
+.iph small{color:var(--muted);font-size:12px}
 /*DS:LAYER:START*/
 /* ── Domésticas · base común (v1) ── */
 html { background: var(--ds-bg); }
@@ -579,6 +599,8 @@ body::before{background:transparent}
 
 /* ── solo app del iPhone ── */
 body{margin:0}
+/* sin zoom con los dedos ni con doble toque */
+html,body{touch-action:pan-x pan-y;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .view[hidden]{display:none!important}
 .tile .big{white-space:nowrap;overflow-wrap:normal}
 html{padding-top:env(safe-area-inset-top,0px)}
@@ -595,7 +617,7 @@ html{padding-top:env(safe-area-inset-top,0px)}
 .setup{max-width:520px;margin:0 auto;display:grid;gap:14px}
 .setup p{margin:0;color:var(--ds-ink-2)}
 .setup ol{margin:0;padding-left:20px;color:var(--ds-ink-2);display:grid;gap:6px}
-.setup textarea{width:100%;min-height:84px;border:1.5px solid transparent;background:var(--ds-fill);border-radius:14px;padding:12px;font:15px/1.4 var(--ds-font-mono);color:var(--ds-ink);resize:vertical}
+.setup textarea{width:100%;min-height:84px;border:1.5px solid transparent;background:var(--ds-fill);border-radius:14px;padding:12px;font:16px/1.4 var(--ds-font-mono);color:var(--ds-ink);resize:vertical}
 .setup textarea:focus{outline:none;border-color:var(--ds-tint);box-shadow:0 0 0 4px var(--ds-tint-soft)}
 .setup .btns{display:flex;gap:10px;flex-wrap:wrap}
 .setup .btn{flex:1;min-width:140px}
@@ -1070,6 +1092,9 @@ $('#sheet').addEventListener('click',e=>{if(e.target===$('#sheet'))$('#sheet').c
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&S.clave&&Date.now()-S.leido>60000)cargar()});
 
 /* ---------- arranque ---------- */
+// Sin zoom con los dedos: Safari no siempre respeta user-scalable=no, así que se bloquean los gestos.
+['gesturestart','gesturechange','gestureend'].forEach(t=>document.addEventListener(t,e=>e.preventDefault(),{passive:false}));
+document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1)e.preventDefault()},{passive:false});
 setupGastosControls();
 if(S.clave){
   // Muestra de inmediato lo último que se leyó y luego busca la versión nueva
