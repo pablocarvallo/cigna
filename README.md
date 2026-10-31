@@ -51,7 +51,7 @@ El script arma el resumen, lo cifra, comprueba que se puede descifrar y escribe 
 
 | Archivo | Uso |
 | --- | --- |
-| `index.html` | La app completa (HTML, CSS y JavaScript, sin dependencias ni compilación), con el sistema de diseño de las apps domésticas entre las marcas `DS:TOKENS` y `DS:LAYER` |
+| `index.html` | La app completa (HTML, CSS y JavaScript, sin dependencias ni compilación), con el sistema de diseño de las apps domésticas entre las marcas `DS:TOKENS`, `DS:VARS`, `DS:BASE` y `DS:APP` (la base común se copia desde el repositorio casa) |
 | `datos/cigna.enc.json` | Datos del artifact, cifrados |
 | `herramientas/publicar.mjs` | Arma y cifra `datos/cigna.enc.json` a partir de la exportación del artifact |
 | `manifest.webmanifest` | Nombre, colores e iconos de la app instalada |

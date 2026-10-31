@@ -140,7 +140,8 @@ body {
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.012em;
 }
-/* ── fin de los tokens comunes ── */
+/*DS:TOKENS:END*/
+/*DS:VARS:START*/
 
 :root{
   --bg:var(--ds-bg); --surface:var(--ds-surface); --surface-2:var(--ds-surface-2); --ink:var(--ds-ink); --ink-2:var(--ds-ink-2); --muted:var(--ds-ink-2); --line:var(--ds-line-2);
@@ -166,7 +167,7 @@ body {
     --p-L:#719DF6; --p-J:#2CC7D6; --p-E:#9C8CF5; --p-P:#A9BEE6;
     --grid:rgba(189,235,251,.08); --axis:rgba(189,235,251,.18); --bar:rgba(21,35,64,.78);
 }
-/*DS:TOKENS:END*/
+/*DS:VARS:END*/
 *{box-sizing:border-box}
 html,body{background:var(--bg)}
 body{color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
@@ -524,8 +525,8 @@ dialog.sheet.wide{max-width:920px}
 .iph-code{display:flex;gap:8px;align-items:center;min-width:0}
 .iph-code code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:13px var(--ds-font-mono,monospace);background:var(--ds-fill,var(--surface-2));border-radius:12px;padding:12px;-webkit-user-select:all;user-select:all}
 .iph small{color:var(--muted);font-size:12px}
-/*DS:LAYER:START*/
-/* ── Domésticas · base común (v1) ── */
+/*DS:BASE:START*/
+/* ── Domésticas · elementos comunes (v1): fondo, tipografía, campos, icono de la app ── */
 html { background: var(--ds-bg); }
 body {
   font-family: var(--ds-font);
@@ -541,7 +542,8 @@ button, input, select, textarea { font-family: inherit; }
 input, select, textarea { accent-color: var(--ds-btn); caret-color: var(--ds-tint); }
 @keyframes ds-rise { from { transform: translateY(28px); opacity: 0; } to { transform: none; opacity: 1; } }
 .mark.app-icon, img.app-icon { display: block; overflow: hidden; padding: 0; background: none; object-fit: cover; border-radius: 23%; box-shadow: 0 0 0 0.5px rgba(14, 27, 51, 0.08), 0 4px 12px rgba(41, 80, 244, 0.25); }
-/* ── fin de la base común ── */
+/*DS:BASE:END*/
+/*DS:APP:START*/
 
 /* Domésticas · componentes (Gastos médicos) */
 .eyebrow,.card-h h2,.tile .lbl{font-size:13px;letter-spacing:-.005em;text-transform:none;font-weight:600;color:var(--ds-ink-2)}
@@ -595,7 +597,7 @@ body::before{background:transparent}
   .fab{border-radius:999px}
   .grp{background:transparent}
 }
-/*DS:LAYER:END*/
+/*DS:APP:END*/
 
 /* ── solo app del iPhone ── */
 body{margin:0}
