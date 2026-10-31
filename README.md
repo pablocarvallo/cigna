@@ -26,9 +26,8 @@ El código queda guardado solo en ese iPhone. Para quitarlo, usa «Quitar el có
 El artifact es la fuente de los datos. La app del iPhone lee una copia publicada en este repositorio:
 
 1. Cada cambio en el artifact queda marcado como pendiente de publicar.
-2. Una tarea programada de Claude revisa varias veces al día si hay cambios. Si los hay, exporta los datos del artifact, los cifra con `herramientas/publicar.mjs` y sube `datos/cigna.enc.json` a este repositorio.
-3. En el artifact, **Banco → App del iPhone → Publicar ahora** lanza esa misma tarea sin esperar al siguiente horario.
-4. La app lee el archivo cada vez que se abre o vuelve a primer plano, y con el botón de actualizar. Arriba indica cuándo se publicaron los datos que muestra.
+2. En el artifact, **Banco → App del iPhone → Publicar ahora** lanza una tarea de Claude (sin horario, solo a pedido) que exporta los datos del artifact, los cifra con `herramientas/publicar.mjs` y sube `datos/cigna.enc.json` a este repositorio. En la misma hoja se puede activar que publique sola unos minutos después del último cambio, mientras el artifact esté abierto.
+3. La app lee el archivo cada vez que se abre o vuelve a primer plano, y con el botón de actualizar. Arriba indica cuándo se publicaron los datos que muestra.
 
 Sin conexión, la app muestra la última copia que leyó.
 
